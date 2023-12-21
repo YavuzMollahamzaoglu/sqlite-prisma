@@ -17,6 +17,14 @@ model User {
   articles Article[]
 }
 
+model Users {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  name     String
+  age      Int
+  username String @unique
+}
+
 model Article {
   id       Int     @id @default(autoincrement())
   title    String

@@ -13,10 +13,32 @@ app.get("/person", (req, res) => {
 app.put("/user", async (req, res) => {
   const user = await prisma.user.create({
     data: {
-      name: "Yavuz Mollahamzaoglu",
-      email: "yavuzmollahamzaoglu@gmail.com",
+      name: req.body.name,
+      email: req.body.email,
     },
   });
+
+  const users = await prisma.user.findMany();
+  console.log(users);
+
+  res.send("Hello put");
+});
+
+app.post("/users", async (req, res) => {
+  let age: number = req.body.age;
+
+  if (age < 18) {
+    res.status(404).json("We can not create");
+  } else {
+    const user = await prisma.users.create({
+      data: {
+        name: req.body.name,
+        email: req.body.email,
+        age: req.body.age,
+        username: req.body.username,
+      },
+    });
+  }
 
   const users = await prisma.user.findMany();
   console.log(users);
