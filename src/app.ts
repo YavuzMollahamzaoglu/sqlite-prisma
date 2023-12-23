@@ -24,27 +24,111 @@ app.put("/user", async (req, res) => {
   res.send("Hello put");
 });
 
-app.post("/users", async (req, res) => {
-  let age: number = req.body.age;
+// app.post("/users", async (req, res) => {
+//   const user = await prisma.users.create({
+//     data: {
+//       name: req.body.name,
+//       email: req.body.email,
+//       age: req.body.age,
+//       username: req.body.username,
+//     },
+//   });
 
-  if (age < 18) {
-    res.status(404).json("We can not create");
-  } else {
-    const user = await prisma.users.create({
-      data: {
-        name: req.body.name,
-        email: req.body.email,
-        age: req.body.age,
-        username: req.body.username,
-      },
-    });
-  }
+//   const users = await prisma.user.findMany();
+//   console.log(users);
 
-  const users = await prisma.user.findMany();
-  console.log(users);
+//   res.send("We created a new user without a problem.");
+// });
 
-  res.send("Hello put");
-});
+// app.post("/users", async (req, res) => {
+//   if (Error) {
+//     console.log("This username already exists please choose new one.", Error);
+//     res.send("This username already exists please choose new one.");
+//   } else {
+//     const user = await prisma.users.create({
+//       data: {
+//         name: req.body.name,
+//         email: req.body.email,
+//         age: req.body.age,
+//         username: req.body.username,
+//       },
+//     });
+
+//     const users = await prisma.user.findMany();
+//     console.log(users);
+
+//     res.send("We created a new user without a problem.");
+//   }
+// });
+
+// app.post("/users", async (req, res) => {
+//   let age: number = req.body.age;
+
+//   if (age < 18) {
+//     res.send("You have to be more than 18 for this website.");
+//   } else {
+//     const user = await prisma.users.create({
+//       data: {
+//         name: req.body.name,
+//         email: req.body.email,
+//         age: req.body.age,
+//         username: req.body.username,
+//       },
+//     });
+
+//     const users = await prisma.user.findMany();
+//     console.log(users);
+
+//     res.send("We created a new user without a problem.");
+//   }
+// });
+
+// app.post("/users", async (req, res) => {
+//   const user = await prisma.users.update({
+//     where: {
+//       id: 1,
+//     },
+//     data: {
+//       name: req.body.name,
+//     },
+//   });
+
+//   const users = await prisma.user.findMany();
+//   console.log(users);
+
+//   res.send(`Your profile name changed to ${req.body.name}`);
+// });
+
+// app.post("/users", async (req, res) => {
+//   const user = await prisma.users.delete({
+//     where: {
+//       id: 4,
+//     },
+//   });
+
+//   const users = await prisma.user.findMany();
+//   console.log(users);
+
+//   res.send(`User with the  ${req.body.username} ID number has been deleted.`);
+// });
+
+// app.post("/users", async (req, res) => {
+//   const users = await prisma.user.findMany();
+//   res.json(users);
+
+//   res.send(`Hello post`);
+// });
+
+// app.post("/users", async (req, res) => {
+//   const users = await prisma.user.findUnique({
+//     where: {
+//       email: "yavuzmollahamzaoglu@gmail.com",
+//     },
+//   });
+//   res.json(users);
+
+//   res.send(`Hello post`);
+// });
 
 app.post("/article", (req, res) => {
   console.log(req.body.body);
