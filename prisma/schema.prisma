@@ -11,24 +11,9 @@ datasource db {
 }
 
 model User {
-  id       Int       @id @default(autoincrement())
-  email    String    @unique
-  name     String?
-  articles Article[]
-}
-
-model Users {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  name     String
-  age      Int
-  username String @unique
-}
-
-model Article {
   id       Int     @id @default(autoincrement())
-  title    String
-  body     String?
-  author   User    @relation(fields: [authorId], references: [id])
-  authorId Int
+  email    String  @unique
+  name     String?
+  age      Int
+  username String  @unique
 }
