@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, User } from "@prisma/client";
 import express from "express";
 
 const app = express();
@@ -316,3 +316,45 @@ app.get("/users", async (req, res) => {
   const users = await prisma.users.findMany();
   res.send({ count: users.length, data: users || [] });
 });
+
+export class PrismaUserRepository {
+  async save(userInput: {
+    email: string;
+    name?: string;
+    age: number;
+    username: string;
+  }): Promise<void> {
+    await prisma.user.create({
+      data: userInput,
+    });
+  }
+
+  async getById(userId: number): Promise<User | null> {
+    return prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+  }
+
+  async getAllUsers(): Promise<User[]> {
+    return prisma.user.findMany();
+  }
+
+  async updateUser(updatedUser: User): Promise<void> {
+    await prisma.user.update({
+      where: {
+        id: updatedUser.id,
+      },
+      data: updatedUser,
+    });
+  }
+
+  async deleteUser(userId: number): Promise<void> {
+    await prisma.user.delete({
+      where: {
+        id: userId,
+      },
+    });
+  }
+}
